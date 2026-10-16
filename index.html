@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b09">
+<meta name="description" content="Live status, player count and version for LOCA SMP Minecraft server.">
+<title>LOCA SMP — Live Server Status</title>
+<style>
+:root{color-scheme:dark;--bg:#070a08;--panel:#101612;--line:#24362a;--green:#7dff8a;--muted:#9bb0a0;--white:#f3fff4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#17351e 0,transparent 45%),var(--bg);color:var(--white);font:16px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+header{width:min(1100px,92%);margin:auto;display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+.brand{display:flex;gap:12px;align-items:center;font-weight:900;letter-spacing:.12em}.logo{display:grid;place-items:center;width:42px;height:42px;border:1px solid #3b7547;background:#112719;border-radius:12px;color:var(--green);font-size:23px;box-shadow:0 0 25px #39ff681c}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+main{width:min(920px,92%);margin:auto;flex:1;display:grid;place-items:center;padding:34px 0 72px}.hero{text-align:center;width:100%}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.28em;text-transform:uppercase}.eyebrow:before{content:"";display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin:0 10px 1px 0;box-shadow:0 0 12px var(--green)}
+h1{font-size:clamp(42px,8vw,78px);line-height:1.02;letter-spacing:-.065em;margin:18px 0 14px;font-weight:950}h1 span{color:var(--green);text-shadow:0 0 34px #69ff7a30}.sub{color:var(--muted);margin:0 auto 30px;max-width:540px}
+.status{max-width:700px;margin:0 auto 18px;padding:22px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,#121b14ed,#0b100c);box-shadow:0 24px 90px #0008;text-align:left}
+.status-top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line)}.server-name{font-weight:800;font-size:18px}.server-address{font:13px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--muted);margin-top:4px}.state{display:flex;align-items:center;gap:8px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--green)}.dot{width:8px;height:8px;background:currentColor;border-radius:50%;box-shadow:0 0 12px currentColor}.state.offline{color:#ff7777}.state.loading{color:#f4d77c}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:18px}.stat{background:#080d09;border:1px solid #1b2a1e;border-radius:14px;padding:16px}.label{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}.value{font-size:clamp(19px,3vw,27px);font-weight:850;margin-top:7px;overflow-wrap:anywhere}.value small{font-size:13px;color:var(--muted);font-weight:600}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0}.btn{border:1px solid #426a49;background:#14251a;color:var(--white);padding:13px 18px;border-radius:12px;text-decoration:none;font-weight:800;cursor:pointer}.btn.primary{background:var(--green);color:#071009;border-color:var(--green)}.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}.notice{min-height:24px;color:var(--muted);font-size:12px}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:700px;margin:28px auto 0;text-align:left}.feature{padding:15px;border:1px solid #1d2a20;border-radius:14px;background:#0c110d}.feature strong{display:block;font-size:13px}.feature span{display:block;color:var(--muted);font-size:12px;margin-top:4px}footer{border-top:1px solid #172219;padding:22px 4%;text-align:center;color:#718476;font-size:12px}footer b{color:var(--green)}
+@media(max-width:560px){.status{padding:16px}.stats{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}.features{grid-template-columns:1fr}.status-top{align-items:flex-start;flex-direction:column}.pill{display:none}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">✳</div><span>LOCA SMP</span></div><div class="pill">Minecraft Java • Survival</div></header>
+<main><section class="hero">
+<div class="eyebrow">Your next adventure starts here</div>
+<h1>PLAY <span>LOCA.</span></h1>
+<p class="sub">Your survival world. Your economy. Your community.<br>Check the server live and jump in.</p>
+<section class="status" aria-live="polite">
+<div class="status-top"><div><div class="server-name">LOCA SMP Network</div><div class="server-address" id="address">locasmp.top</div></div><div class="state loading" id="state"><span class="dot"></span><span>Checking server</span></div></div>
+<div class="stats">
+<div class="stat"><div class="label">Players online</div><div class="value" id="players">— <small>/ —</small></div></div>
+<div class="stat"><div class="label">Server version</div><div class="value" id="version">Checking…</div></div>
+<div class="stat"><div class="label">Last checked</div><div class="value" id="checked">Just now</div></div>
+</div>
+</section>
+<div class="actions"><button class="btn primary" id="copy">Copy Server IP</button><a class="btn" href="https://discord.com/" target="_blank" rel="noopener">Join Discord ↗</a></div>
+<div class="notice" id="notice">Status refreshes automatically about every 60 seconds.</div>
+<div class="features"><div class="feature"><strong>✦ Survival</strong><span>Build your legacy.</span></div><div class="feature"><strong>◈ Player economy</strong><span>Trade, grind and climb.</span></div><div class="feature"><strong>⌁ Community</strong><span>Bring your friends.</span></div></div>
+</section></main>
+<footer>Built for <b>LOCA SMP</b> · Not affiliated with Mojang or Microsoft</footer>
+<script>
+const SERVER = "locasmp.top";
+const API = "https://api.mcsrvstat.us/3/" + encodeURIComponent(SERVER);
+const $ = id => document.getElementById(id);
+function setState(text, cls){$("state").className="state "+cls;$("state").innerHTML='<span class="dot"></span><span>'+text+'</span>';}
+async function refresh(){
+  try{
+    const response=await fetch(API,{cache:"no-store"});
+    if(!response.ok) throw new Error("Status API returned "+response.status);
+    const data=await response.json();
+    $("checked").textContent=new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+    if(data.online){
+      setState("Online","");const online=data.players?.online ?? 0;const max=data.players?.max;
+      $("players").innerHTML=online+' <small>/ '+(max ?? "—")+'</small>';
+      $("version").textContent=data.version || data.protocol?.name || "Online";
+      $("notice").textContent="Server is responding. Status data may be cached for up to 5 minutes.";
+    }else{
+      setState("Offline","offline");$("players").innerHTML='0 <small>/ —</small>';$("version").textContent="Unavailable";$("notice").textContent="The status service cannot currently detect the server. It may be offline or pinging may be restricted.";
+    }
+  }catch(e){setState("Status unavailable","offline");$("players").textContent="—";$("version").textContent="Unknown";$("notice").textContent="Could not load status right now. Try refreshing the page.";$("checked").textContent="—";}
+}
+$("copy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(SERVER);$("notice").textContent="Copied locasmp.top — paste it into Minecraft Java Edition!";}catch(e){$("notice").textContent="Server address: locasmp.top";}});
+refresh();setInterval(refresh,60000);
+</script>
+</body></html>
