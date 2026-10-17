@@ -1,43 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#070a08">
-<meta name="description" content="Join LOCA SMP, the Minecraft survival server built around mining, earning money, trading and advancing.">
-<title>LOCA SMP — Mine. Earn. Advance.</title>
+<meta name="theme-color" content="#060907">
+<meta name="description" content="LOCA SMP — Mine blocks, earn money, flex your rank and advance. Join the ultimate Minecraft survival grind.">
+<title>LOCA SMP | Mine. Earn. Advance.</title>
 
 <style>
 :root {
-  color-scheme: dark;
-  --bg: #070a08;
-  --panel: #0d130f;
-  --panel2: #111b14;
-  --line: #263b2b;
+  --bg: #060907;
+  --panel: #0d140f;
+  --panel2: #111c14;
+  --line: #253b2b;
   --green: #83ff91;
-  --green2: #36dc69;
-  --text: #f2fff3;
-  --muted: #98ad9c;
-  --red: #ff7777;
-  --radius: 20px;
+  --green2: #37e66c;
+  --white: #f1fff3;
+  --muted: #94a99a;
+  --red: #ff7272;
 }
 
 * { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
+  scroll-padding-top: 85px;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse at 50% -20%, #1b4828 0, transparent 48%),
-    radial-gradient(ellipse at 100% 50%, #102218 0, transparent 35%),
-    var(--bg);
-  color: var(--text);
-  font: 15px/1.65 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--white);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.65;
   overflow-x: hidden;
 }
 
@@ -50,17 +46,45 @@ button:focus-visible, a:focus-visible {
   outline-offset: 4px;
 }
 
-button:disabled { opacity: .55; cursor: wait; }
+::selection { background: var(--green); color: #061008; }
 
-::selection { background: var(--green); color: #071009; }
+#particles {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .5;
+}
+
+.ambient {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: #24ff5210;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: -1;
+  animation: ambient 12s ease-in-out infinite alternate;
+}
+
+.ambient.one { top: -200px; left: -150px; }
+.ambient.two { right: -250px; bottom: 0; animation-delay: -5s; }
+
+@keyframes ambient {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(90px, 60px) scale(1.3); }
+}
 
 .wrap { width: min(1120px, 91%); margin-inline: auto; }
 
 header {
   position: sticky;
-  z-index: 10;
   top: 0;
-  background: #070a08eF;
+  z-index: 20;
+  background: #060907eF;
   border-bottom: 1px solid #263b2b99;
   backdrop-filter: blur(18px);
 }
@@ -68,8 +92,8 @@ header {
 .nav {
   min-height: 76px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 20px;
 }
 
@@ -77,9 +101,9 @@ header {
   display: flex;
   align-items: center;
   gap: 11px;
+  font-weight: 1000;
+  letter-spacing: .12em;
   text-decoration: none;
-  font-weight: 950;
-  letter-spacing: .14em;
 }
 
 .logo {
@@ -87,90 +111,89 @@ header {
   height: 42px;
   display: grid;
   place-items: center;
-  border: 1px solid #4a9b5a;
   border-radius: 13px;
   color: var(--green);
-  background: linear-gradient(145deg, #183c22, #0c170e);
-  box-shadow: 0 0 25px #5cff7a17;
+  background: linear-gradient(145deg, #193d22, #0a140d);
+  border: 1px solid #438b4f;
   font-size: 24px;
+  box-shadow: 0 0 25px #83ff9120;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  to { box-shadow: 0 0 32px #83ff9145; }
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 23px;
 }
 
 .nav-links a {
-  text-decoration: none;
   color: var(--muted);
   font-size: 13px;
+  text-decoration: none;
   transition: color .2s;
 }
 
 .nav-links a:hover { color: var(--green); }
 
-.nav-join, .btn {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 8px;
   border: 1px solid var(--line);
   border-radius: 12px;
+  background: #101a13;
+  color: var(--white);
   padding: 12px 18px;
-  background: var(--panel2);
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 800;
+  font-weight: 850;
   cursor: pointer;
-  transition: transform .2s, border-color .2s, background .2s;
+  text-decoration: none;
+  transition: transform .22s, box-shadow .22s, border-color .22s;
 }
 
-.nav-join { border-color: #47784d; padding: 10px 14px; font-size: 13px; }
-
-.btn:hover, .nav-join:hover {
-  transform: translateY(-2px);
+.btn:hover {
+  transform: translateY(-3px);
   border-color: var(--green);
+  box-shadow: 0 8px 30px #83ff9110;
 }
 
 .btn.primary {
   color: #061008;
   background: var(--green);
   border-color: var(--green);
-  box-shadow: 0 0 32px #83ff911b;
+  box-shadow: 0 0 30px #83ff9120;
 }
 
-.btn.primary:hover { background: #b1ffba; }
+.btn.primary:hover {
+  background: #b3ffbc;
+  box-shadow: 0 0 40px #83ff9140;
+}
 
 .btn.small { padding: 8px 12px; font-size: 12px; }
 
 .hero {
-  position: relative;
+  min-height: 620px;
+  display: grid;
+  place-items: center;
   text-align: center;
-  padding: 105px 0 64px;
+  padding: 95px 0 75px;
+  position: relative;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  width: 350px;
-  height: 350px;
-  border-radius: 50%;
-  background: #41ff6810;
-  filter: blur(80px);
-  top: 50px;
-  left: calc(50% - 175px);
-  pointer-events: none;
-}
+.hero-inner { max-width: 850px; }
 
 .eyebrow {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  justify-content: center;
+  gap: 10px;
   color: var(--green);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 950;
   letter-spacing: .22em;
   text-transform: uppercase;
 }
@@ -178,121 +201,147 @@ header {
 .pulse {
   width: 8px;
   height: 8px;
-  background: var(--green);
   border-radius: 50%;
-  box-shadow: 0 0 14px var(--green);
-  animation: pulse 2s infinite;
+  background: var(--green);
+  box-shadow: 0 0 15px var(--green);
+  animation: pulse 1.7s infinite;
 }
 
 @keyframes pulse {
-  50% { opacity: .4; box-shadow: 0 0 3px var(--green); }
+  50% { opacity: .35; transform: scale(.75); }
 }
 
 h1 {
-  position: relative;
-  margin: 22px 0 16px;
-  font-size: clamp(55px, 10vw, 108px);
+  margin: 24px 0 17px;
+  font-size: clamp(58px, 11vw, 112px);
+  line-height: .92;
   font-weight: 1000;
-  letter-spacing: -.085em;
-  line-height: .98;
+  letter-spacing: -.09em;
+  animation: heroIn .9s both;
 }
 
 h1 span {
+  display: block;
   color: var(--green);
-  text-shadow: 0 0 45px #83ff9128;
+  text-shadow: 0 0 55px #83ff9135;
 }
 
-.hero p {
-  max-width: 590px;
-  margin: 0 auto;
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(25px); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.hero-description {
+  max-width: 610px;
+  margin: 25px auto 0;
   color: var(--muted);
-  font-size: 17px;
+  font-size: clamp(15px, 2vw, 18px);
+  animation: fadeIn 1s .2s both;
 }
 
-.hero-actions {
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.hero-buttons {
   display: flex;
   justify-content: center;
-  gap: 12px;
   flex-wrap: wrap;
-  margin: 28px 0 24px;
+  gap: 12px;
+  margin: 30px 0 22px;
 }
 
-.micro {
-  font-size: 12px !important;
-  color: #829987 !important;
+.server-hint {
+  color: #829987;
+  font-size: 12px;
 }
 
-.micro strong { color: var(--green); }
+.server-hint strong { color: var(--green); }
 
-.section { padding: 62px 0; }
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 20px;
-  margin-bottom: 25px;
+.scroll-cue {
+  position: absolute;
+  bottom: 22px;
+  color: #718a76;
+  font-size: 11px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  animation: bob 2s infinite;
 }
+
+@keyframes bob {
+  50% { transform: translateY(6px); }
+}
+
+.section { padding: 65px 0; }
+
+.section-head { margin-bottom: 25px; }
 
 .kicker {
   color: var(--green);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 950;
   letter-spacing: .2em;
   text-transform: uppercase;
 }
 
 h2 {
-  margin: 7px 0 0;
-  font-size: clamp(27px, 4vw, 39px);
-  line-height: 1.15;
-  letter-spacing: -.045em;
+  margin: 8px 0 0;
+  font-size: clamp(28px, 4.5vw, 43px);
+  line-height: 1.13;
+  letter-spacing: -.055em;
 }
 
-h3 { margin: 0; font-size: 17px; }
+h3 { margin: 0; font-size: 18px; }
 
-.section-desc { color: var(--muted); margin: 9px 0 0; }
+.muted { color: var(--muted); }
+
+.section-description {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
 
 .panel {
   border: 1px solid var(--line);
-  background: linear-gradient(145deg, #111a13f5, #0a100c);
-  border-radius: var(--radius);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #111a13f5, #090e0b);
 }
 
 .status-panel {
-  max-width: 790px;
-  margin: 12px auto 0;
   padding: 25px;
-  box-shadow: 0 25px 90px #0005;
-  text-align: left;
+  max-width: 820px;
+  margin: auto;
+  box-shadow: 0 20px 80px #0005;
+  animation: fadeIn .8s both;
 }
 
 .status-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
-  padding-bottom: 21px;
+  gap: 14px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
 }
 
-.server-title { font-weight: 900; font-size: 18px; }
+.server-title { font-weight: 950; font-size: 18px; }
 
 .server-ip {
+  font-family: ui-monospace, Consolas, monospace;
   color: var(--muted);
-  font: 13px ui-monospace, monospace;
+  font-size: 13px;
   overflow-wrap: anywhere;
 }
 
 .state {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
+  color: #f5d777;
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: .11em;
   font-weight: 900;
-  color: #f4d77c;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .state.online { color: var(--green); }
@@ -306,24 +355,23 @@ h3 { margin: 0; font-size: 17px; }
 }
 
 .stat {
-  min-width: 0;
-  padding: 17px;
-  border: 1px solid #203024;
   background: #080d09;
-  border-radius: 15px;
+  border: 1px solid #203024;
+  border-radius: 14px;
+  padding: 17px;
 }
 
 .stat-label {
-  color: var(--muted);
   font-size: 10px;
   letter-spacing: .13em;
   text-transform: uppercase;
+  color: var(--muted);
 }
 
 .stat-value {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 950;
   margin-top: 7px;
-  font-size: clamp(19px, 3vw, 27px);
-  font-weight: 900;
   overflow-wrap: anywhere;
 }
 
@@ -331,8 +379,8 @@ h3 { margin: 0; font-size: 17px; }
 
 .status-bottom {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   flex-wrap: wrap;
   margin-top: 17px;
@@ -346,166 +394,258 @@ h3 { margin: 0; font-size: 17px; }
   gap: 15px;
 }
 
-.feature {
-  padding: 23px;
-  min-height: 205px;
+.card {
   position: relative;
   overflow: hidden;
-  transition: transform .2s, border-color .2s;
+  padding: 24px;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
 }
 
-.feature:hover {
-  transform: translateY(-4px);
-  border-color: #4b8155;
+.card::after {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  right: -70px;
+  bottom: -80px;
+  border-radius: 50%;
+  background: #83ff9110;
+  filter: blur(20px);
+  transition: .3s;
 }
 
-.feature-icon {
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #4c8555;
+  box-shadow: 0 15px 35px #0003;
+}
+
+.card:hover::after { background: #83ff9128; }
+
+.card-icon {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
-  margin-bottom: 20px;
-  border-radius: 13px;
-  border: 1px solid #36563d;
-  background: #14281a;
-  font-size: 23px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #34563b;
+  background: #14291a;
+  border-radius: 14px;
+  font-size: 24px;
+  margin-bottom: 19px;
 }
 
-.feature p { color: var(--muted); font-size: 13px; margin-bottom: 0; }
+.card p { color: var(--muted); font-size: 13px; margin-bottom: 0; }
 
-.feature .number {
+.card-number {
   position: absolute;
-  top: 17px;
-  right: 20px;
+  top: 20px;
+  right: 22px;
+  color: #4b6850;
+  font-weight: 950;
   font-size: 12px;
-  color: #58705c;
-  font-weight: 900;
 }
 
 .guide-layout {
   display: grid;
-  grid-template-columns: 245px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 17px;
-  align-items: stretch;
 }
 
-.guide-tabs {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+.guide-tabs { display: flex; flex-direction: column; gap: 9px; }
 
 .tab {
   text-align: left;
+  padding: 15px;
   border: 1px solid transparent;
   background: #0b110d;
-  border-radius: 13px;
-  padding: 15px;
   color: var(--muted);
+  border-radius: 13px;
   cursor: pointer;
-  font-weight: 750;
+  font-weight: 800;
   transition: .2s;
 }
 
-.tab:hover { border-color: var(--line); color: var(--text); }
+.tab:hover { border-color: var(--line); color: var(--white); }
 
 .tab.active {
-  border-color: #47794e;
-  background: #14251a;
   color: var(--green);
+  background: #14251a;
+  border-color: #47794e;
+  box-shadow: inset 3px 0 var(--green);
 }
 
 .guide-content {
-  padding: clamp(22px, 4vw, 35px);
-  min-height: 330px;
+  padding: clamp(22px, 4vw, 38px);
+  min-height: 340px;
+  animation: fadeIn .35s both;
 }
 
-.guide-content .feature-icon { margin-bottom: 15px; }
+.guide-content h3 { font-size: 27px; letter-spacing: -.04em; }
 
-.guide-content h3 { font-size: 25px; letter-spacing: -.04em; }
+.guide-content p, .guide-content li { color: var(--muted); }
 
-.guide-content p { color: var(--muted); }
-
-.guide-content ol { padding-left: 22px; }
-
+.guide-content ol { padding-left: 23px; }
 .guide-content li { padding: 5px 0; }
 
+.guide-content code {
+  color: var(--green);
+  background: #0a110c;
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
 .tip {
+  margin-top: 20px;
   padding: 14px 16px;
-  border: 1px solid #35523b;
+  border: 1px solid #35533b;
   border-radius: 12px;
   background: #112017;
-  color: #c4e6ca;
+  color: #c6e8cb;
   font-size: 13px;
-  margin-top: 20px;
 }
 
 .tip strong { color: var(--green); }
 
 .economy-banner {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  grid-template-columns: 1fr 1fr;
   overflow: hidden;
 }
 
-.economy-copy { padding: clamp(25px, 5vw, 48px); }
+.economy-copy { padding: clamp(25px, 5vw, 45px); }
 
 .economy-copy p { color: var(--muted); }
 
 .economy-steps {
   padding: 25px;
+  background: #0a100c;
+  border-left: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 11px;
-  border-left: 1px solid var(--line);
-  background: #0a100c;
 }
 
 .economy-step {
   display: flex;
   align-items: center;
   gap: 14px;
-  border: 1px solid #203024;
-  background: #0d150f;
   padding: 13px;
+  background: #0d150f;
+  border: 1px solid #203024;
   border-radius: 13px;
+  transition: .2s;
 }
 
-.step-no {
-  flex: 0 0 33px;
-  height: 33px;
+.economy-step:hover {
+  border-color: #548b5d;
+  transform: translateX(4px);
+}
+
+.step-number {
+  flex: 0 0 35px;
+  height: 35px;
   display: grid;
   place-items: center;
-  background: #17341e;
-  color: var(--green);
   border-radius: 10px;
-  font-weight: 900;
+  background: #18361f;
+  color: var(--green);
+  font-weight: 950;
 }
 
 .economy-step strong { display: block; font-size: 13px; }
 .economy-step span { display: block; color: var(--muted); font-size: 12px; }
 
+.rank-banner {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(25px, 5vw, 42px);
+}
+
+.rank-banner::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -100px;
+  top: -120px;
+  border-radius: 50%;
+  background: #83ff9115;
+  filter: blur(35px);
+}
+
+.rank-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.rank-card {
+  padding: 18px;
+  background: #090f0b;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  transition: transform .2s, border-color .2s;
+}
+
+.rank-card:hover { transform: translateY(-4px); border-color: #5d9e68; }
+
+.rank-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  margin-bottom: 13px;
+  border-radius: 6px;
+  border: 1px solid #406c48;
+  background: #14251a;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: .08em;
+}
+
+.rank-card h3 { font-size: 16px; }
+.rank-card p { color: var(--muted); font-size: 12px; margin-bottom: 0; }
+
+.rank-note {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .command-list { display: grid; gap: 10px; }
 
 .command {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 15px;
-  padding: 15px 17px;
+  padding: 14px 17px;
   border: 1px solid var(--line);
   background: #0c120e;
   border-radius: 13px;
+  transition: border-color .2s;
 }
+
+.command:hover { border-color: #4c7953; }
 
 .command code {
   color: var(--green);
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 850;
+  overflow-wrap: anywhere;
 }
 
 .command p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
+
+.command-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.command-group .command { min-width: 0; }
 
 .faq { display: grid; gap: 10px; }
 
@@ -514,30 +654,30 @@ h3 { margin: 0; font-size: 17px; }
   border: 1px solid var(--line);
   background: #0c120e;
   border-radius: 13px;
+  transition: border-color .2s;
 }
 
-.faq summary {
-  cursor: pointer;
-  font-weight: 800;
-}
+.faq details[open] { border-color: #47794e; }
 
+.faq summary { cursor: pointer; font-weight: 850; }
 .faq details p { color: var(--muted); margin-bottom: 0; font-size: 14px; }
 
 .join-panel {
-  padding: clamp(25px, 5vw, 45px);
   text-align: center;
-  background:
-    radial-gradient(ellipse at 50% 0, #1a4a26a0, transparent 70%),
-    #0d140f;
+  padding: clamp(28px, 6vw, 55px);
+  background: radial-gradient(ellipse at 50% 0, #1b4b27a0, transparent 72%), #0d140f;
+  position: relative;
+  overflow: hidden;
 }
 
-.join-panel h2 { font-size: clamp(32px, 6vw, 48px); }
+.join-panel h2 { font-size: clamp(34px, 6vw, 55px); }
+.join-panel h2 span { color: var(--green); }
 .join-panel p { color: var(--muted); }
 
 footer {
-  margin-top: 60px;
   border-top: 1px solid #1a281d;
-  padding: 28px 0;
+  padding: 27px 0;
+  margin-top: 40px;
   color: #718476;
   font-size: 12px;
 }
@@ -553,8 +693,8 @@ footer strong { color: var(--green); }
 
 .toast {
   position: fixed;
-  z-index: 20;
-  bottom: 22px;
+  z-index: 50;
+  bottom: 24px;
   left: 50%;
   transform: translate(-50%, 20px);
   opacity: 0;
@@ -562,58 +702,69 @@ footer strong { color: var(--green); }
   background: var(--green);
   color: #061008;
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 900;
   padding: 12px 18px;
   border-radius: 12px;
   box-shadow: 0 10px 40px #0008;
   transition: .25s;
+  width: max-content;
   max-width: 90%;
   text-align: center;
 }
 
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-@media(max-width:720px) {
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media(max-width:760px) {
   .nav-links { display: none; }
-  .hero { padding-top: 75px; }
+  .hero { min-height: 540px; padding-top: 75px; }
   .grid { grid-template-columns: 1fr; }
-  .feature { min-height: 0; }
   .guide-layout { grid-template-columns: 1fr; }
-  .guide-tabs {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  .guide-tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .economy-banner { grid-template-columns: 1fr; }
-  .economy-steps {
-    border-left: 0;
-    border-top: 1px solid var(--line);
-  }
+  .economy-steps { border-left: 0; border-top: 1px solid var(--line); }
+  .rank-grid { grid-template-columns: 1fr; }
   .section { padding: 45px 0; }
 }
 
-@media(max-width:470px) {
-  .brand { letter-spacing: .08em; font-size: 13px; }
+@media(max-width:480px) {
+  .brand { font-size: 12px; letter-spacing: .07em; }
   .logo { width: 36px; height: 36px; }
-  .nav-join { padding: 9px 10px; font-size: 11px; }
+  .nav .btn { padding: 9px 10px; font-size: 11px; }
   .stats { grid-template-columns: 1fr 1fr; }
   .stat:last-child { grid-column: 1 / -1; }
-  .status-panel { padding: 17px; }
-  .status-top { align-items: flex-start; flex-direction: column; }
-  .section-head { align-items: flex-start; flex-direction: column; }
+  .status-panel { padding: 16px; }
+  .status-top { flex-direction: column; align-items: flex-start; }
+  .command-group { grid-template-columns: 1fr; }
   .command { align-items: flex-start; }
 }
 
-@media(prefers-reduced-motion:reduce) {
+@media(prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    scroll-behavior: auto !important;
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
   }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
 
 <body>
+<canvas id="particles" aria-hidden="true"></canvas>
+<div class="ambient one"></div>
+<div class="ambient two"></div>
+
 <header>
   <nav class="nav wrap" aria-label="Main navigation">
     <a href="#home" class="brand">
@@ -622,37 +773,44 @@ footer strong { color: var(--green); }
     </a>
 
     <div class="nav-links">
-      <a href="#status">Server status</a>
+      <a href="#status">Live status</a>
       <a href="#features">Features</a>
       <a href="#guide">How to play</a>
+      <a href="#ranks">Ranks</a>
       <a href="#commands">Commands</a>
     </div>
 
-    <button class="nav-join" data-copy-ip>Join server ↗</button>
+    <button class="btn primary small" data-copy-ip>Join server ↗</button>
   </nav>
 </header>
 
 <main>
   <section class="hero wrap" id="home">
-    <div class="eyebrow"><span class="pulse"></span> YOUR NEXT ADVENTURE STARTS HERE</div>
+    <div class="hero-inner">
+      <div class="eyebrow"><span class="pulse"></span> THE SURVIVAL GRIND STARTS HERE</div>
 
-    <h1>PLAY <span>LOCA.</span></h1>
+      <h1>LOOT. ORE.<span>CASH. ADVANCE.</span></h1>
 
-    <p>
-      Mine blocks. Make money. Build your empire.
-      Welcome to a survival server where every block
-      brings you one step closer to the top.
-    </p>
+      <p class="hero-description">
+        Mine better blocks. Earn more money. Unlock your next goal.
+        Flex your rank, teleport with friends and build your legacy
+        on LOCA SMP.
+      </p>
 
-    <div class="hero-actions">
-      <button class="btn primary" data-copy-ip>▶ &nbsp; Play LOCA SMP</button>
-      <a class="btn" href="#guide">Explore the server ↓</a>
+      <div class="hero-buttons">
+        <button class="btn primary" data-copy-ip>⛏ &nbsp; Copy Server IP</button>
+        <a class="btn" href="#guide">Discover LOCA ↓</a>
+      </div>
+
+      <div class="server-hint">
+        JAVA SERVER · <strong>locasmp.top</strong> · YOUR NEXT GRIND AWAITS
+      </div>
     </div>
 
-    <p class="micro">SERVER IP: <strong>locasmp.top</strong> · Minecraft Java</p>
+    <div class="scroll-cue">SCROLL TO EXPLORE ↓</div>
   </section>
 
-  <section class="wrap" id="status">
+  <section class="wrap reveal" id="status">
     <div class="panel status-panel">
       <div class="status-top">
         <div>
@@ -662,7 +820,7 @@ footer strong { color: var(--green); }
 
         <div class="state" id="state" aria-live="polite">
           <span class="pulse"></span>
-          <span id="stateText">Connecting...</span>
+          <span id="stateText">Checking status...</span>
         </div>
       </div>
 
@@ -682,212 +840,315 @@ footer strong { color: var(--green); }
       </div>
 
       <div class="status-bottom">
-        <span id="statusMessage">Checking the Minecraft server...</span>
-        <button class="btn small" id="refresh">↻ Refresh status</button>
+        <span id="statusMessage">Contacting the status service...</span>
+        <button class="btn small" id="refresh">↻ Refresh</button>
       </div>
     </div>
   </section>
 
-  <section class="section wrap" id="features">
+  <section class="section wrap reveal" id="features">
     <div class="section-head">
-      <div>
-        <div class="kicker">WHY LOCA?</div>
-        <h2>Your grind. Your progress.</h2>
-        <p class="section-desc">More than just another survival world.</p>
-      </div>
+      <div class="kicker">THE LOCA EXPERIENCE</div>
+      <h2>Grind hard. Get rewarded.</h2>
+      <p class="section-description">Every block, every dollar and every rank moves you forward.</p>
     </div>
 
     <div class="grid">
-      <article class="panel feature">
-        <span class="number">01</span>
-        <div class="feature-icon">⛏</div>
-        <h3>Mine for profit</h3>
-        <p>Dig deep, gather valuable resources and turn your mining time into progress.</p>
+      <article class="panel card">
+        <span class="card-number">01</span>
+        <div class="card-icon">⛏</div>
+        <h3>Mine for money</h3>
+        <p>Mine blocks and earn cash based on the value of each block. Better blocks mean bigger rewards.</p>
       </article>
 
-      <article class="panel feature">
-        <span class="number">02</span>
-        <div class="feature-icon">◈</div>
-        <h3>Build your wealth</h3>
-        <p>Use the server economy to sell resources, earn money and work towards better gear.</p>
+      <article class="panel card">
+        <span class="card-number">02</span>
+        <div class="card-icon">💰</div>
+        <h3>Build your balance</h3>
+        <p>Turn your mining grind into money. Save your balance and work towards your next big purchase.</p>
       </article>
 
-      <article class="panel feature">
-        <span class="number">03</span>
-        <div class="feature-icon">⌂</div>
-        <h3>Make your mark</h3>
-        <p>Create your base, explore the world, trade with players and grow your legacy.</p>
+      <article class="panel card">
+        <span class="card-number">03</span>
+        <div class="card-icon">👑</div>
+        <h3>Flex your rank</h3>
+        <p>Buy ranks, switch between your available groups and show off your prefix in chat.</p>
+      </article>
+
+      <article class="panel card">
+        <span class="card-number">04</span>
+        <div class="card-icon">✨</div>
+        <h3>Discover Essences</h3>
+        <p>Visit the Essence Shop and explore another way to work towards valuable items.</p>
+      </article>
+
+      <article class="panel card">
+        <span class="card-number">05</span>
+        <div class="card-icon">⚡</div>
+        <h3>Teleport anywhere</h3>
+        <p>Use random teleport to explore or teleport to friends and invite them to your location.</p>
+      </article>
+
+      <article class="panel card">
+        <span class="card-number">06</span>
+        <div class="card-icon">🏡</div>
+        <h3>Make it yours</h3>
+        <p>Set homes, visit spawn and build your own place in the LOCA SMP survival world.</p>
       </article>
     </div>
   </section>
 
-  <section class="section wrap" id="guide">
+  <section class="section wrap reveal" id="guide">
     <div class="section-head">
-      <div>
-        <div class="kicker">NEW PLAYER GUIDE</div>
-        <h2>Learn how LOCA works.</h2>
-        <p class="section-desc">Choose a step to discover how to get started.</p>
-      </div>
+      <div class="kicker">PLAYER HANDBOOK</div>
+      <h2>How to play LOCA.</h2>
+      <p class="section-description">Choose a guide to learn how each part of the server works.</p>
     </div>
 
     <div class="guide-layout">
-      <div class="guide-tabs" role="tablist" aria-label="Player guide">
-        <button class="tab active" role="tab" aria-selected="true" data-tab="start">01 · Getting started</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="mining">02 · Mining</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="money">03 · Making money</button>
-        <button class="tab" role="tab" aria-selected="false" data-tab="progress">04 · Progression</button>
+      <div class="guide-tabs" role="tablist" aria-label="LOCA guides">
+        <button class="tab active" role="tab" aria-selected="true" data-tab="mining">⛏ Mining & money</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="essence">✧ Essence Shop</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="ranks">👑 Ranks & prefixes</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="teleport">⚡ Teleportation</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="homes">⌂ Homes & spawn</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="community">♧ Trading & safety</button>
       </div>
 
       <article class="panel guide-content" id="guideContent" role="tabpanel" aria-live="polite">
-        <div class="feature-icon" id="guideIcon">✦</div>
-        <div class="kicker" id="guideKicker">STEP 01</div>
-        <h3 id="guideTitle">Welcome to LOCA SMP</h3>
+        <div class="card-icon" id="guideIcon">⛏</div>
+        <div class="kicker" id="guideKicker">THE MAIN GRIND</div>
+        <h3 id="guideTitle">Mine blocks. Earn cash.</h3>
+
         <div id="guideBody">
-          <p>Getting started is easy. Connect to the server and begin your survival adventure.</p>
+          <p>Mining is the heart of LOCA SMP. Every block you mine can reward you with money, depending on the block's value.</p>
           <ol>
-            <li>Open Minecraft Java Edition.</li>
-            <li>Go to Multiplayer, then Add Server.</li>
-            <li>Enter <strong>locasmp.top</strong> as the server address.</li>
-            <li>Join, explore and start collecting resources.</li>
+            <li>Head into the world and start mining.</li>
+            <li>More valuable blocks give you more money.</li>
+            <li>Check your balance using <code>/bal</code>.</li>
+            <li>Use your earnings towards your next goals.</li>
           </ol>
         </div>
+
         <div class="tip" id="guideTip">
-          <strong>TIP:</strong> Keep your first resources and tools safe while you learn the server.
+          <strong>PRO TIP:</strong> Focus on valuable blocks to maximise your earnings.
         </div>
       </article>
     </div>
   </section>
 
-  <section class="section wrap" id="economy">
+  <section class="section wrap reveal" id="economy">
     <div class="section-head">
-      <div>
-        <div class="kicker">THE LOCA ECONOMY</div>
-        <h2>Loot. Ore. Cash. Advance.</h2>
-        <p class="section-desc">Turn your time in the mines into a bigger adventure.</p>
-      </div>
+      <div class="kicker">THE MONEY SYSTEM</div>
+      <h2>Not all blocks are equal.</h2>
+      <p class="section-description">The more valuable the block, the more money you can earn.</p>
     </div>
 
     <div class="panel economy-banner">
       <div class="economy-copy">
-        <div class="feature-icon">💎</div>
-        <h2>Every block counts.</h2>
+        <div class="card-icon">💎</div>
+        <h2>Turn your pickaxe into profit.</h2>
         <p>
-          LOCA SMP revolves around mining, collecting resources
-          and earning in-game money. Gather ores, learn the server
-          shop and use your earnings to support your next goals.
+          LOCA rewards mining based on the type of block.
+          Ordinary blocks and rare ores have different values,
+          so choosing what to mine can make a difference to your income.
         </p>
-        <button class="btn primary" data-tab-link="money">Learn to earn →</button>
+        <button class="btn primary" data-tab-link="mining">Learn about mining →</button>
       </div>
 
       <div class="economy-steps">
         <div class="economy-step">
-          <div class="step-no">1</div>
-          <div><strong>Mine resources</strong><span>Collect ores and valuable blocks.</span></div>
+          <div class="step-number">1</div>
+          <div><strong>Find blocks</strong><span>Explore underground and discover ores.</span></div>
         </div>
         <div class="economy-step">
-          <div class="step-no">2</div>
-          <div><strong>Sell your loot</strong><span>Use the available server economy commands.</span></div>
+          <div class="step-number">2</div>
+          <div><strong>Mine for rewards</strong><span>Earn money based on the block you mine.</span></div>
         </div>
         <div class="economy-step">
-          <div class="step-no">3</div>
-          <div><strong>Reinvest your money</strong><span>Buy supplies and work towards your goals.</span></div>
+          <div class="step-number">3</div>
+          <div><strong>Check your balance</strong><span>Use /bal to see your current money.</span></div>
         </div>
         <div class="economy-step">
-          <div class="step-no">4</div>
-          <div><strong>Advance</strong><span>Improve your gear, base and survival experience.</span></div>
+          <div class="step-number">4</div>
+          <div><strong>Keep advancing</strong><span>Save, spend and keep building your progress.</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section wrap" id="commands">
-    <div class="section-head">
-      <div>
-        <div class="kicker">QUICK REFERENCE</div>
-        <h2>Useful server commands.</h2>
-        <p class="section-desc">Tap a command to copy it. Availability depends on your permissions and installed plugins.</p>
+  <section class="section wrap reveal" id="ranks">
+    <div class="panel rank-banner">
+      <div class="kicker">SHOW THEM WHO YOU ARE</div>
+      <h2>More than a name. It's your flex.</h2>
+      <p class="section-description">
+        LOCA ranks use LuckPerms groups and prefixes. Purchase the ranks
+        available on your server and switch between groups you own.
+        Make your name stand out in chat.
+      </p>
+
+      <div class="rank-grid">
+        <article class="rank-card">
+          <div class="rank-badge">YOUR START</div>
+          <h3>Start your journey</h3>
+          <p>Join the server, start mining and begin building your balance.</p>
+        </article>
+        <article class="rank-card">
+          <div class="rank-badge">YOUR UPGRADE</div>
+          <h3>Unlock more ranks</h3>
+          <p>Purchase available rank groups and show off your prefix.</p>
+        </article>
+        <article class="rank-card">
+          <div class="rank-badge">YOUR FLEX</div>
+          <h3>Switch your prefix</h3>
+          <p>Switch between ranks you own to choose the prefix you want to display.</p>
+        </article>
+      </div>
+
+      <div class="tip">
+        <strong>REMEMBER:</strong> Rank names, prices, permissions and prefixes depend on
+        the groups configured on LOCA SMP. Visit <code>/rank</code> in-game to see
+        the available rank options.
       </div>
     </div>
+  </section>
 
-    <div class="command-list">
+  <section class="section wrap reveal" id="commands">
+    <div class="section-head">
+      <div class="kicker">YOUR IN-GAME TOOLKIT</div>
+      <h2>Commands you should know.</h2>
+      <p class="section-description">Click any Copy button to copy the command.</p>
+    </div>
+
+    <div class="command-group">
       <div class="command">
-        <div><code>/shop</code><p>Open the server shop, if enabled.</p></div>
-        <button class="btn small" data-command="/shop">Copy</button>
-      </div>
-      <div class="command">
-        <div><code>/balance</code><p>Check your Vault economy balance.</p></div>
-        <button class="btn small" data-command="/balance">Copy</button>
-      </div>
-      <div class="command">
-        <div><code>/pay PLAYER AMOUNT</code><p>Pay another player, if permitted.</p></div>
-        <button class="btn small" data-command="/pay PLAYER AMOUNT">Copy</button>
-      </div>
-      <div class="command">
-        <div><code>/spawn</code><p>Return to spawn, if the command is enabled.</p></div>
+        <div><code>/spawn</code><p>Travel back to spawn.</p></div>
         <button class="btn small" data-command="/spawn">Copy</button>
       </div>
+
       <div class="command">
-        <div><code>/sethome</code><p>Set a home if your permissions allow it.</p></div>
-        <button class="btn small" data-command="/sethome">Copy</button>
+        <div><code>/store</code><p>Open the server store.</p></div>
+        <button class="btn small" data-command="/store">Copy</button>
       </div>
+
       <div class="command">
-        <div><code>/home</code><p>Return to a saved home, if available.</p></div>
+        <div><code>/essenceshop</code><p>Open the Essence Shop.</p></div>
+        <button class="btn small" data-command="/essenceshop">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/mine</code><p>Access the server's mining feature.</p></div>
+        <button class="btn small" data-command="/mine">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/bal</code><p>Check your money balance.</p></div>
+        <button class="btn small" data-command="/bal">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/rank</code><p>View or manage available ranks.</p></div>
+        <button class="btn small" data-command="/rank">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/rtp</code><p>Randomly teleport and explore.</p></div>
+        <button class="btn small" data-command="/rtp">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/home</code><p>Return to a saved home.</p></div>
         <button class="btn small" data-command="/home">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/tpa PLAYER</code><p>Request to teleport to a player.</p></div>
+        <button class="btn small" data-command="/tpa PLAYER">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/tpahere PLAYER</code><p>Ask a player to teleport to you.</p></div>
+        <button class="btn small" data-command="/tpahere PLAYER">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/tpaccept</code><p>Accept a teleport request.</p></div>
+        <button class="btn small" data-command="/tpaccept">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/trade PLAYER</code><p>Start a trade with another player.</p></div>
+        <button class="btn small" data-command="/trade PLAYER">Copy</button>
+      </div>
+
+      <div class="command">
+        <div><code>/report</code><p>Report a player to staff.</p></div>
+        <button class="btn small" data-command="/report">Copy</button>
       </div>
     </div>
 
     <div class="tip">
-      <strong>PLEASE NOTE:</strong> These are common Minecraft plugin commands, not a live
-      list fetched from your server. Remove any commands your server does not support.
+      <strong>TELEPORT TIP:</strong> Replace PLAYER with the player's Minecraft username.
+      Follow any in-game prompts when using requests and trades.
     </div>
   </section>
 
-  <section class="section wrap" id="faq">
+  <section class="section wrap reveal" id="faq">
     <div class="section-head">
-      <div>
-        <div class="kicker">GOOD TO KNOW</div>
-        <h2>Frequently asked questions.</h2>
-      </div>
+      <div class="kicker">NEED HELP?</div>
+      <h2>Frequently asked questions.</h2>
     </div>
 
     <div class="faq">
       <details>
-        <summary>What is the LOCA SMP server IP?</summary>
-        <p>Use <strong>locasmp.top</strong> in the Multiplayer server address field in Minecraft Java Edition.</p>
+        <summary>How do I earn money?</summary>
+        <p>Mine blocks. Your reward depends on the block's value, so more valuable blocks earn more money. Check your balance with <code>/bal</code>.</p>
       </details>
 
       <details>
-        <summary>How do I start making money?</summary>
-        <p>Start by collecting resources, then check the in-game shop and available selling options. Your balance uses the server's configured economy.</p>
+        <summary>How do I get a rank?</summary>
+        <p>Use <code>/rank</code> to explore the rank options configured on the server. Ranks are LuckPerms groups with different prefixes. You can switch between ranks you own using the server's rank system.</p>
       </details>
 
       <details>
-        <summary>Can I play with friends?</summary>
-        <p>Yes, provided your friends can connect to the server and meet its version and access requirements. Share the server address with them.</p>
+        <summary>How do I teleport to my friends?</summary>
+        <p>Use <code>/tpa PLAYER</code> to request to teleport to someone, or <code>/tpahere PLAYER</code> to request that they come to you. The other player can use <code>/tpaccept</code> to accept.</p>
       </details>
 
       <details>
-        <summary>Why does the server show as offline?</summary>
-        <p>The status provider may be unable to reach the server, the server may be offline, or status queries may be restricted. The result is not a definitive server-side diagnostic.</p>
+        <summary>What is the Essence Shop?</summary>
+        <p>It is a separate shop accessed with <code>/essenceshop</code>. Check the in-game menu for available items and their Essence costs.</p>
       </details>
 
       <details>
-        <summary>Can I join from Bedrock Edition?</summary>
-        <p>Bedrock access depends on your current Geyser and proxy configuration. Confirm the correct Bedrock address and UDP port with the server administrator before connecting.</p>
+        <summary>How do I explore somewhere new?</summary>
+        <p>Use <code>/rtp</code> for random teleportation, if available in your current situation. You can use <code>/spawn</code> to return to spawn.</p>
+      </details>
+
+      <details>
+        <summary>How do I save my base location?</summary>
+        <p>Use the server's home system with <code>/home</code> and any setup command or menu your server provides for saving homes.</p>
+      </details>
+
+      <details>
+        <summary>Can I play on Bedrock Edition?</summary>
+        <p>Bedrock support depends on the server's current Geyser and proxy configuration. Confirm the correct Bedrock connection address and UDP port before joining.</p>
       </details>
     </div>
   </section>
 
-  <section class="section wrap">
+  <section class="section wrap reveal">
     <div class="panel join-panel">
-      <div class="eyebrow"><span class="pulse"></span> YOUR ADVENTURE AWAITS</div>
-      <h2>Ready to play <span style="color:var(--green)">LOCA?</span></h2>
-      <p>Grab your pickaxe. Find your fortune. Make your mark.</p>
-      <div class="hero-actions">
-        <button class="btn primary" data-copy-ip>Copy Server IP</button>
-        <a class="btn" href="#guide">Read the guide ↑</a>
+      <div class="eyebrow"><span class="pulse"></span> YOUR NEXT GRIND STARTS NOW</div>
+      <h2>Ready to play <span>LOCA SMP?</span></h2>
+      <p>Mine the blocks. Earn the cash. Flex your rank.</p>
+
+      <div class="hero-buttons">
+        <button class="btn primary" data-copy-ip>⚡ Copy Server IP</button>
+        <a class="btn" href="#guide">Learn how to play ↑</a>
       </div>
-      <div class="server-ip">Java address: locasmp.top</div>
+
+      <div class="server-ip">Java Server: locasmp.top</div>
     </div>
   </section>
 </main>
@@ -895,7 +1156,7 @@ footer strong { color: var(--green); }
 <footer>
   <div class="wrap footer-inner">
     <span>© <span id="year"></span> <strong>LOCA SMP</strong> · Loot. Ore. Cash. Advance.</span>
-    <span>Independent Minecraft community. Not affiliated with Mojang or Microsoft.</span>
+    <span>Independent Minecraft server · Not affiliated with Mojang or Microsoft.</span>
   </div>
 </footer>
 
@@ -905,14 +1166,98 @@ footer strong { color: var(--green); }
 "use strict";
 
 const SERVER = "locasmp.top";
-const API = "https://api.mcsrvstat.us/3/" + encodeURIComponent(SERVER);
+const STATUS_API = "https://api.mcsrvstat.us/3/" + encodeURIComponent(SERVER);
 
 const $ = id => document.getElementById(id);
-let toastTimer;
-let statusRequest;
-let lastStatus = 0;
 
 $("year").textContent = new Date().getFullYear();
+
+/* Floating green particles */
+(function initParticles() {
+  const canvas = $("particles");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let particles = [];
+  let width = 0;
+  let height = 0;
+  let frame = 0;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(65, Math.floor(width / 19));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 1.7 + .5,
+      speed: Math.random() * .35 + .1,
+      drift: (Math.random() - .5) * .25,
+      alpha: Math.random() * .5 + .15
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (const p of particles) {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(131,255,145,${p.alpha})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (!reducedMotion) {
+        p.y -= p.speed;
+        p.x += p.drift;
+
+        if (p.y < -5) {
+          p.y = height + 5;
+          p.x = Math.random() * width;
+        }
+        if (p.x < -5) p.x = width + 5;
+        if (p.x > width + 5) p.x = -5;
+      }
+    }
+
+    if (!reducedMotion) frame = requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(frame);
+    resize();
+    draw();
+  }, { passive: true });
+})();
+
+/* Scroll reveal animations */
+const revealElements = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  revealElements.forEach(el => observer.observe(el));
+} else {
+  revealElements.forEach(el => el.classList.add("visible"));
+}
+
+/* Toast notifications */
+let toastTimer;
 
 function toast(message) {
   $("toast").textContent = message;
@@ -921,6 +1266,7 @@ function toast(message) {
   toastTimer = setTimeout(() => $("toast").classList.remove("show"), 2600);
 }
 
+/* Copy buttons */
 async function copyText(text, successMessage) {
   try {
     if (navigator.clipboard && window.isSecureContext) {
@@ -929,16 +1275,19 @@ async function copyText(text, successMessage) {
       const field = document.createElement("textarea");
       field.value = text;
       field.style.position = "fixed";
-      field.style.opacity = "0";
+      field.style.left = "-9999px";
       document.body.appendChild(field);
       field.select();
+
       const copied = document.execCommand("copy");
       field.remove();
-      if (!copied) throw new Error("Copy unavailable");
+
+      if (!copied) throw new Error("Clipboard unavailable");
     }
+
     toast(successMessage);
   } catch {
-    toast("Copy unavailable. Please copy manually: " + text);
+    toast("Copy manually: " + text);
   }
 }
 
@@ -954,62 +1303,92 @@ document.querySelectorAll("[data-command]").forEach(button => {
   });
 });
 
+/* Interactive player guides */
 const guides = {
-  start: {
-    icon: "✦",
-    kicker: "STEP 01",
-    title: "Welcome to LOCA SMP",
-    body: `
-      <p>Getting started is easy. Connect to the server and begin your survival adventure.</p>
-      <ol>
-        <li>Open Minecraft Java Edition.</li>
-        <li>Go to Multiplayer, then Add Server.</li>
-        <li>Enter <strong>locasmp.top</strong> as the server address.</li>
-        <li>Join, explore and start collecting resources.</li>
-      </ol>`,
-    tip: "<strong>TIP:</strong> Keep your first resources and tools safe while you learn the server."
-  },
   mining: {
     icon: "⛏",
-    kicker: "STEP 02",
-    title: "Get mining",
+    kicker: "THE MAIN GRIND",
+    title: "Mine blocks. Earn cash.",
     body: `
-      <p>Mining is at the heart of LOCA. Explore underground and collect resources that help you progress.</p>
+      <p>Mining is the heart of LOCA SMP. Every block you mine can reward you with money, depending on the block's value.</p>
       <ol>
-        <li>Craft or obtain a pickaxe and bring torches.</li>
-        <li>Explore caves and mine useful ores.</li>
-        <li>Store valuable loot in a safe place.</li>
-        <li>Check which blocks are valuable through the server's shop.</li>
+        <li>Head into the world and start mining.</li>
+        <li>More valuable blocks give you more money.</li>
+        <li>Check your balance using <code>/bal</code>.</li>
+        <li>Use your earnings towards your next goals.</li>
       </ol>`,
-    tip: "<strong>TIP:</strong> Bring food and spare tools before heading into a dangerous cave."
+    tip: "<strong>PRO TIP:</strong> Focus on valuable blocks to maximise your earnings."
   },
-  money: {
-    icon: "◈",
-    kicker: "STEP 03",
-    title: "Turn loot into money",
+  essence: {
+    icon: "✧",
+    kicker: "A DIFFERENT KIND OF CURRENCY",
+    title: "Explore the Essence Shop.",
     body: `
-      <p>Build your balance using the server's configured Vault economy and available shop features.</p>
+      <p>LOCA has an Essence Shop that you can open in-game with <code>/essenceshop</code>.</p>
       <ol>
-        <li>Collect ores and other resources.</li>
-        <li>Try <code>/shop</code> to see the available shop.</li>
-        <li>Check your balance using <code>/balance</code>.</li>
-        <li>Save up for supplies, equipment and future projects.</li>
-      </ol>`,
-    tip: "<strong>TIP:</strong> Check item prices before selling valuable materials."
+        <li>Open the Essence Shop.</li>
+        <li>Browse the available items.</li>
+        <li>Check the Essence price before buying.</li>
+        <li>Choose rewards that fit your plans.</li>
+      </ol>
+      <p>Essence is separate from your regular money balance. Check the in-game menu for your current options.</p>`,
+    tip: "<strong>PRO TIP:</strong> Check the displayed price before confirming a purchase."
   },
-  progress: {
-    icon: "⬆",
-    kicker: "STEP 04",
-    title: "Build your legacy",
+  ranks: {
+    icon: "👑",
+    kicker: "SHOW OFF YOUR STATUS",
+    title: "Your rank. Your prefix.",
     body: `
-      <p>Use your resources and earnings to create a survival world worth showing off.</p>
+      <p>Ranks are configured as LuckPerms groups. Different ranks can have different prefixes, giving your name its own style.</p>
       <ol>
-        <li>Upgrade your tools and armour.</li>
-        <li>Build a secure base.</li>
-        <li>Explore, trade and collaborate with other players.</li>
-        <li>Work towards your own long-term goals.</li>
+        <li>Use <code>/rank</code> to see the available options.</li>
+        <li>Purchase a rank through the configured system.</li>
+        <li>Switch between the ranks you own when supported.</li>
+        <li>Show your prefix off in chat.</li>
       </ol>`,
-    tip: "<strong>TIP:</strong> Check in-game commands and permissions to discover which features are enabled."
+    tip: "<strong>PRO TIP:</strong> Check the available rank names and prices in-game. Exact perks depend on your server configuration."
+  },
+  teleport: {
+    icon: "⚡",
+    kicker: "EXPLORE WITH FRIENDS",
+    title: "Teleport around the world.",
+    body: `
+      <p>LOCA offers commands to explore randomly or request teleportation to other players.</p>
+      <ol>
+        <li>Use <code>/rtp</code> to request a random location.</li>
+        <li>Use <code>/tpa PLAYER</code> to request to visit someone.</li>
+        <li>Use <code>/tpahere PLAYER</code> to invite someone to you.</li>
+        <li>The recipient can use <code>/tpaccept</code> to accept.</li>
+      </ol>`,
+    tip: "<strong>PRO TIP:</strong> Confirm teleport requests with people you trust."
+  },
+  homes: {
+    icon: "⌂",
+    kicker: "MAKE A PLACE YOUR OWN",
+    title: "Save your home and find spawn.",
+    body: `
+      <p>Use the server's home features to get back to familiar places and <code>/spawn</code> to return to spawn.</p>
+      <ol>
+        <li>Find a good place for your base.</li>
+        <li>Use the configured home setup command or menu.</li>
+        <li>Use <code>/home</code> when you want to return.</li>
+        <li>Use <code>/spawn</code> to return to spawn.</li>
+      </ol>`,
+    tip: "<strong>PRO TIP:</strong> Check in-game help for the exact home setup syntax and any home limits."
+  },
+  community: {
+    icon: "♧",
+    kicker: "PLAY TOGETHER",
+    title: "Trade, team up and report.",
+    body: `
+      <p>Survival is better with a community. Trade with other players and use the server's tools to help keep things fair.</p>
+      <ol>
+        <li>Use <code>/trade PLAYER</code> to start a trade.</li>
+        <li>Check every item before confirming a trade.</li>
+        <li>Use <code>/report</code> to report a player if needed.</li>
+        <li>Be respectful and follow the server rules.</li>
+      </ol>`,
+    tip: "<strong>PRO TIP:</strong> Only confirm trades when you are happy with everything being exchanged."
   }
 };
 
@@ -1028,6 +1407,11 @@ function showGuide(key) {
     button.classList.toggle("active", active);
     button.setAttribute("aria-selected", String(active));
   });
+
+  const content = $("guideContent");
+  content.style.animation = "none";
+  void content.offsetWidth;
+  content.style.animation = "fadeIn .35s both";
 }
 
 document.querySelectorAll("[data-tab]").forEach(button => {
@@ -1037,18 +1421,24 @@ document.querySelectorAll("[data-tab]").forEach(button => {
 document.querySelectorAll("[data-tab-link]").forEach(button => {
   button.addEventListener("click", () => {
     showGuide(button.dataset.tabLink);
-    $("guide").scrollIntoView({ behavior: "smooth" });
+    $("guide").scrollIntoView({ behavior: "smooth", block: "start" });
   });
 });
 
-function setState(text, mode) {
+/* Live Minecraft status */
+let statusController = null;
+let lastStatusCheck = 0;
+
+function setState(label, mode) {
   $("state").className = "state " + mode;
-  $("stateText").textContent = text;
+  $("stateText").textContent = label;
 }
 
 async function refreshStatus() {
-  if (statusRequest) statusRequest.abort();
-  statusRequest = new AbortController();
+  if (statusController) statusController.abort();
+
+  const controller = new AbortController();
+  statusController = controller;
 
   const button = $("refresh");
   button.disabled = true;
@@ -1057,9 +1447,9 @@ async function refreshStatus() {
   $("statusMessage").textContent = "Contacting the status service...";
 
   try {
-    const response = await fetch(API, {
+    const response = await fetch(STATUS_API, {
       cache: "no-store",
-      signal: statusRequest.signal
+      signal: controller.signal
     });
 
     if (!response.ok) throw new Error("Status request failed");
@@ -1071,7 +1461,7 @@ async function refreshStatus() {
       minute: "2-digit"
     });
 
-    lastStatus = Date.now();
+    lastStatusCheck = Date.now();
 
     if (data.online) {
       setState("Online", "online");
@@ -1086,16 +1476,14 @@ async function refreshStatus() {
         data.version || data.protocol?.name || "Online";
 
       $("statusMessage").textContent =
-        "The status provider can reach the server.";
-
+        "The status service can reach your server.";
     } else {
       setState("Offline", "offline");
       $("players").innerHTML = '0 <small>/ —</small>';
       $("version").textContent = "Unavailable";
       $("statusMessage").textContent =
-        "The status provider could not detect the server. It may be offline or query access may be restricted.";
+        "The status service cannot detect the server. It may be offline or query access may be restricted.";
     }
-
   } catch (error) {
     if (error.name === "AbortError") return;
 
@@ -1104,11 +1492,11 @@ async function refreshStatus() {
     $("version").textContent = "Unknown";
     $("checked").textContent = "—";
     $("statusMessage").textContent =
-      "Could not retrieve status. Try again shortly.";
+      "Could not retrieve status. Please try again shortly.";
   } finally {
-    if (statusRequest && !statusRequest.signal.aborted) {
+    if (statusController === controller) {
       button.disabled = false;
-      button.textContent = "↻ Refresh status";
+      button.textContent = "↻ Refresh";
     }
   }
 }
@@ -1116,9 +1504,12 @@ async function refreshStatus() {
 $("refresh").addEventListener("click", refreshStatus);
 
 refreshStatus();
+
 setInterval(() => {
-  if (document.visibilityState === "visible" &&
-      Date.now() - lastStatus >= 55000) {
+  if (
+    document.visibilityState === "visible" &&
+    Date.now() - lastStatusCheck >= 60000
+  ) {
     refreshStatus();
   }
 }, 10000);
